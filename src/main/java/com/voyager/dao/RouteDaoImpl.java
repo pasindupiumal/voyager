@@ -164,9 +164,21 @@ public class RouteDaoImpl implements RouteDao{
 	}
 
 	@Override
-	public boolean delete(Route o) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(Route route) throws SQLException {
+		
+		boolean rowDeleted = false;
+		
+		final String sqlStatement1 = "DELETE FROM routes WHERE routeID=?";
+		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
+		
+		ps1.setInt(1,  route.getRouteID());
+		
+		//Delete the row and get confirmation
+		rowDeleted = ps1.executeUpdate() > 0;
+		
+		return rowDeleted;
+		
+		
 	}
 
 }
