@@ -95,20 +95,72 @@ public class RouteDaoImpl implements RouteDao{
 			
 		}
 		
+		//Close preapredStatement
+		if(ps1 != null) {
+			ps1.close();
+		}
+		
+		//Close result set
+		if(rs1 != null) {
+			rs1.close();
+		}
+		
 		//Return the routes list
 		return routeList;
 	}
 
 	@Override
-	public boolean create(Route o) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean create(Route route) throws SQLException {
+		
+		boolean rowInserted = false;
+		
+		final String sqlStatement1 = "INSERT INTO routes(routeName, routeNumber, origin, destination, routeOffice) VALUES(?,?,?,?,?)";
+		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
+		
+		ps1.setString(1,  route.getRouteName());
+		ps1.setString(2,  route.getRouteName());
+		ps1.setString(3,  route.getOrigin());
+		ps1.setString(4,  route.getDestination());
+		ps1.setString(5,  route.getRouteOffice());
+		
+		//Insert the row and get the confirmation
+		rowInserted = ps1.executeUpdate() > 0;
+		
+		//Close preapredStatement
+		if(ps1 != null) {
+			ps1.close();
+		}
+		
+		return rowInserted;
+		
 	}
 
 	@Override
-	public boolean update(Route o) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Route route) throws SQLException {
+		
+		boolean rowUpdated = false;
+		
+		final String sqlStatement1 = "UPDATE routes SET routeName=?, routeNumber=?, origin=?, destination=?, routeOffice=? WHERE routeID=?";
+		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
+		
+		ps1.setString(1,  route.getRouteName());
+		ps1.setString(2,  route.getRouteName());
+		ps1.setString(3,  route.getOrigin());
+		ps1.setString(4,  route.getDestination());
+		ps1.setString(5,  route.getRouteOffice());
+		ps1.setInt(6, route.getRouteID());
+		
+		//Update row and get confirmation
+		rowUpdated = ps1.executeUpdate() > 0;
+		
+		//Close preapredStatement
+		if(ps1 != null) {
+			ps1.close();
+		}
+		
+		return rowUpdated;
+				
+	
 	}
 
 	@Override
