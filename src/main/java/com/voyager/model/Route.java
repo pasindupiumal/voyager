@@ -10,6 +10,17 @@ public class Route {
 	private String routeOffice;
 	
 	
+	public Route(int routeID, String routeName, String routeNumber, String origin, String destination, String routeOffice) {
+		super();
+		this.routeID = routeID;
+		this.routeName = routeName;
+		this.routeNumber = routeNumber;
+		this.origin = origin;
+		this.destination = destination;
+		this.routeOffice = routeOffice;
+	}
+	
+
 	public int getRouteID() {
 		return routeID;
 	}
