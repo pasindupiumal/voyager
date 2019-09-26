@@ -27,7 +27,9 @@ public class RouteController extends HttpServlet {
 		
 		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement JSP");
 		
-		final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/RouteManagement.jsp");
+		String name = "Pasindu";
+		request.setAttribute("Name", name);
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/NewFile.jsp");
 		dispatcher.forward(request, response);
 		
 	}
