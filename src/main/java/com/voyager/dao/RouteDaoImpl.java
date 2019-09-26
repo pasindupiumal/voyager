@@ -1,13 +1,12 @@
 package com.voyager.dao;
 
 import java.sql.SQLException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
-
-import com.mysql.jdbc.Connection;
 import com.voyager.database.DBConnection;
 import com.voyager.model.Route;
 
@@ -15,9 +14,11 @@ public class RouteDaoImpl implements RouteDao{
 	
 	private Connection connection = null;
 	
-	private RouteDaoImpl() throws SQLException {
+	public RouteDaoImpl() throws SQLException, ClassNotFoundException {
+		
 		//Get database connection
-		connection = DBConnection.getConnection();
+		final DBConnection dbConnection = DBConnection.getInstance();
+		connection = dbConnection.getConnection();
 	}
 
 	@Override

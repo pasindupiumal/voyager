@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:out value="${Name}"/>
+	<c:forEach var="route" items="${routeList}">
+		routeID ${route.routeID} <br/>
+		routeName ${route.routeName} <br/>
+	</c:forEach>
 </body>
 </html>
