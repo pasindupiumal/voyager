@@ -6,9 +6,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../css/RouteManagement.css" type="text/css">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color:black">
 	<c:forEach var="route" items="${routeList}">
 		routeID ${route.routeID} <br/>
 		routeName ${route.routeName} <br/>

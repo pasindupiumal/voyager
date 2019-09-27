@@ -40,7 +40,7 @@ public class RouteController extends HttpServlet {
 			
 			request.setAttribute("routeList", routeList);
 			
-			final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/NewFile.jsp");
+			final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/RouteManagement.jsp");
 			dispatcher.forward(request, response); 
 			
 			
