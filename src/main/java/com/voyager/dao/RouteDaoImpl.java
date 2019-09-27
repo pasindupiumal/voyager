@@ -74,7 +74,7 @@ public class RouteDaoImpl implements RouteDao{
 	public List<Route> findAll() throws SQLException {
 		
 		//Retrieve all the routes from the database
-		final List<Route> routeList = new ArrayList();
+		final List<Route> routeList = new ArrayList<Route>();
 		
 		final String sqlStatement1 = "SELECT * FROM routes";
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);

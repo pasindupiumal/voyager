@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sun.istack.internal.logging.Logger;
-import com.voyager.dao.RouteDao;
-import com.voyager.dao.RouteDaoImpl;
+import com.voyager.dao.Dao;
+import com.voyager.dao.DaoFactory;
 import com.voyager.model.Route;
 
 
@@ -21,6 +21,7 @@ public class RouteController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(RouteController.class);
+	private final DaoFactory daoFactory = new DaoFactory();
 
     public RouteController() {
         super();
@@ -33,7 +34,8 @@ public class RouteController extends HttpServlet {
 		
 		try {
 					
-			final RouteDao routes = new RouteDaoImpl();
+			@SuppressWarnings("unchecked")
+			final Dao<Route, Integer> routes = daoFactory.getDataAcessObject("Route");
 			List<Route> routeList = routes.findAll();
 			
 			request.setAttribute("routeList", routeList);
