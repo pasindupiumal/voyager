@@ -17,7 +17,7 @@ public class DaoFactory {
 			return new RouteDaoImpl();
 		}
 		
-		return null;
+		throw new IllegalArgumentException("Invalid DAO type passed to DaoFactory. Doesn't exist");
 		
 	}
 	
