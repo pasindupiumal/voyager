@@ -21,8 +21,17 @@
   		<url-pattern>/Routes</url-pattern>
   	</servlet-mapping>
   	<servlet-mapping>
+  		<servlet-name>RouteController</servlet-name>
+  		<url-pattern>/Routes/AddNewRoute</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
+  		<servlet-name>RouteController</servlet-name>
+  		<url-pattern>/Routes/ViewAllRoutes</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
   		<servlet-name>HomeController</servlet-name>
   		<url-pattern>/</url-pattern>
-  	</servlet-mapping>	
+  	</servlet-mapping>
+  		
 </web-app>
 

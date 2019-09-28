@@ -32,26 +32,10 @@ public class RouteController extends HttpServlet {
 		
 		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement JSP");
 		
-		try {
-					
-			@SuppressWarnings("unchecked")
-			final Dao<Route, Integer> routes = daoFactory.getDataAcessObject("Route");
-			List<Route> routeList = routes.findAll();
-			
-			request.setAttribute("routeList", routeList);
-			System.out.println(request.getContextPath());
-			final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/ViewAllRoutes.jsp");
-			dispatcher.forward(request, response); 
-			
-			
-		} catch (SQLException e) {
-			
-			LOGGER.log(Level.INFO, "SQL Exception: " + e.toString());
-			
-		} catch (ClassNotFoundException e) {
-			
-			LOGGER.log(Level.INFO, "ClassNotFound Exception: " + e.toString());
-		} 
+		
+		String action = request.getServletPath();
+		System.out.println("Servlet path: " + action);
+		
 		
 	}
 
