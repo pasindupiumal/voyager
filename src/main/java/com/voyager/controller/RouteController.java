@@ -49,7 +49,7 @@ public class RouteController extends HttpServlet {
 			
 			}
 		}
-		catch(SQLException e) {
+		catch(SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.SEVERE, "SQL Exception: " + e.toString());
 		}
 
@@ -89,8 +89,13 @@ public class RouteController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
-	private final void showAllRoutes(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+	private final void showAllRoutes(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		final Dao dao = daoFactory.getDataAcessObject("route");
+		final List<Route> routeList = dao.findAll();
+		
 		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/ViewAllRoutes.jsp");
+		request.setAttribute("routeList", routeList);
 		dispatcher.forward(request, response);
 		
 	}

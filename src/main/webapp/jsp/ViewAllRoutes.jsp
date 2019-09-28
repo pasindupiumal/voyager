@@ -14,18 +14,16 @@
     <style>
         #insertBox {
 
-            width: 70%;
+            width: 90%;
             margin-left: auto;
             margin-right: auto;
             margin-top: 5%;
         }
-        
-        header {
-        
-        	font-size: 18px;
-        }
-        
 
+        header {
+
+            font-size: 18px;
+        }
     </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -38,7 +36,7 @@
 <header>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a style="font-size: 22px; color:white; font-weight: bold" class="navbar-brand" href="#">VOYAGER</a>
+        <a style="font-size: 24px; color:white; font-weight: bold" class="navbar-brand" href="#">VOYAGER</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,9 +48,9 @@
                         Route Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a  class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
+                        <a class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
                         <div class="dropdown-divider"></div>
-                        <a  class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
+                        <a class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -99,7 +97,44 @@
 
 <body>
 
-    View All Routes
+    <div id="insertBox">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Route ID</th>
+                    <th scope="col">Route Name</th>
+                    <th scope="col">Route Number</th>
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Route Office</th>
+                    <th scope="col">Total Distance</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            	
+            	<c:forEach var="route" items="${routeList}">
+            		<tr>
+            			<td> <c:out value="${route.routeID}"/></td>
+	                	<td> <c:out value="${route.routeName}"/></td>
+	                	<td> <c:out value="${route.routeNumber}"/></td>
+	                	<td> <c:out value="${route.origin}"/></td>
+	                	<td> <c:out value="${route.destination}"/></td>
+	                	<td> <c:out value="${route.routeOffice}"/></td>
+	                	<td> <c:out value="${route.totalDistance}"/></td>
+	                	<td> <a href="/voyager/Routes/UpdateRoute?id=<c:out value='${route.routeID}'/>"> Update </a> 
+	                		&nbsp;&nbsp;&nbsp; &nbsp;
+	                		<a style="color:red" href="/voyager/Routes/DeleteRoute?id=<c:out value='${route.routeID}'/>"> Delete </a>
+	                	</td>
+            		</tr>
+            	</c:forEach>
+
+            </tbody>
+        </table>
+    </div>
+
+
 
 </body>
 

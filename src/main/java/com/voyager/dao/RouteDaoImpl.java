@@ -40,6 +40,7 @@ public class RouteDaoImpl implements RouteDao{
 		String origin = null;
 		String destination = null;
 		String routeOffice = null;
+		float totalDistance = 0;
 		
 		//Read from the result set
 		while( rs1.next() ) {
@@ -50,6 +51,7 @@ public class RouteDaoImpl implements RouteDao{
 			origin = rs1.getString("origin");
 			destination = rs1.getString("destination");
 			routeOffice = rs1.getString("routeOffice");
+			totalDistance = rs1.getFloat("totalDistance");
 			
 		}
 		
@@ -64,7 +66,7 @@ public class RouteDaoImpl implements RouteDao{
 		}
 		
 		//Create and return Route object
-		return Optional.of(new Route(routeID, routeName, routeNumber, origin, destination, routeOffice));
+		return Optional.of(new Route(routeID, routeName, routeNumber, origin, destination, routeOffice, totalDistance));
 		
 		
 		
@@ -89,9 +91,10 @@ public class RouteDaoImpl implements RouteDao{
 			final String origin = rs1.getString("origin");
 			final String destination = rs1.getString("destination");
 			final String routeOffice = rs1.getString("routeOffice");
+			final float totalDistance = rs1.getFloat("totalDistance");
 			
 			//Create route object and add to the list
-			final Route newRoute = new Route(routeID, routeName, routeNumber, origin, destination, routeOffice);
+			final Route newRoute = new Route(routeID, routeName, routeNumber, origin, destination, routeOffice, totalDistance);
 			routeList.add(newRoute);
 			
 		}
@@ -115,7 +118,7 @@ public class RouteDaoImpl implements RouteDao{
 		
 		boolean rowInserted = false;
 		
-		final String sqlStatement1 = "INSERT INTO routes(routeName, routeNumber, origin, destination, routeOffice) VALUES(?,?,?,?,?)";
+		final String sqlStatement1 = "INSERT INTO routes(routeName, routeNumber, origin, destination, routeOffice, totalDistance) VALUES(?,?,?,?,?,?)";
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
 		
 		ps1.setString(1,  route.getRouteName());
@@ -123,6 +126,7 @@ public class RouteDaoImpl implements RouteDao{
 		ps1.setString(3,  route.getOrigin());
 		ps1.setString(4,  route.getDestination());
 		ps1.setString(5,  route.getRouteOffice());
+		ps1.setFloat(6, route.getTotalDistance());
 		
 		//Insert the row and get the confirmation
 		rowInserted = ps1.executeUpdate() > 0;
@@ -141,7 +145,7 @@ public class RouteDaoImpl implements RouteDao{
 		
 		boolean rowUpdated = false;
 		
-		final String sqlStatement1 = "UPDATE routes SET routeName=?, routeNumber=?, origin=?, destination=?, routeOffice=? WHERE routeID=?";
+		final String sqlStatement1 = "UPDATE routes SET routeName=?, routeNumber=?, origin=?, destination=?, routeOffice=?, totalDistance=? WHERE routeID=?";
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
 		
 		ps1.setString(1,  route.getRouteName());
@@ -149,7 +153,8 @@ public class RouteDaoImpl implements RouteDao{
 		ps1.setString(3,  route.getOrigin());
 		ps1.setString(4,  route.getDestination());
 		ps1.setString(5,  route.getRouteOffice());
-		ps1.setInt(6, route.getRouteID());
+		ps1.setFloat(6,  route.getTotalDistance());
+		ps1.setInt(7, route.getRouteID());
 		
 		//Update row and get confirmation
 		rowUpdated = ps1.executeUpdate() > 0;

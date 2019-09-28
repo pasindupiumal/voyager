@@ -8,9 +8,10 @@ public class Route {
 	private String origin;
 	private String destination;
 	private String routeOffice;
+	private float totalDistance;
 	
 	
-	public Route(int routeID, String routeName, String routeNumber, String origin, String destination, String routeOffice) {
+	public Route(int routeID, String routeName, String routeNumber, String origin, String destination, String routeOffice, float totalDistance) {
 		super();
 		this.routeID = routeID;
 		this.routeName = routeName;
@@ -18,6 +19,7 @@ public class Route {
 		this.origin = origin;
 		this.destination = destination;
 		this.routeOffice = routeOffice;
+		this.totalDistance = totalDistance;
 	}
 	
 
@@ -56,7 +58,17 @@ public class Route {
 	}
 	public void setRouteOffice(String routeOffice) {
 		this.routeOffice = routeOffice;
+	}	
+	public float getTotalDistance() {
+		return totalDistance;
 	}
+
+
+	public void setTotalDistance(float totalDistance) {
+		this.totalDistance = totalDistance;
+	}
+
+
 	@Override
 	public String toString() {
 		return ("Route ID: " + this.routeID + "\nRoute Name: " + this.routeName + "\nRoute Number: " + this.routeNumber + "\nOrigin: " + this.origin + "\nDestination: " + this.destination + "\nRoute Office: " + this.routeOffice);
