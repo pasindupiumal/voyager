@@ -39,8 +39,8 @@ public class RouteController extends HttpServlet {
 			List<Route> routeList = routes.findAll();
 			
 			request.setAttribute("routeList", routeList);
-			
-			final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/RouteManagement.jsp");
+			System.out.println(request.getContextPath());
+			final RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/ViewAllRoutes.jsp");
 			dispatcher.forward(request, response); 
 			
 			
