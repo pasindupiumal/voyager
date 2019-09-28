@@ -33,9 +33,38 @@ public class RouteController extends HttpServlet {
 		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement JSP");
 		
 		
-		String action = request.getServletPath();
+		final String action = request.getServletPath();
 		System.out.println("Servlet path: " + action);
 		
+		try {
+			switch (action) {
+			
+				case "/Routes/AddNewRoute":
+					showNewRoute(request, response);
+					break;
+				
+				case "/Routes/ViewAllRoutes":
+					showAllRoutes(request, response);
+					break;
+			
+			}
+		}
+		catch(SQLException e) {
+			LOGGER.log(Level.SEVERE, "SQL Exception: " + e.toString());
+		}
+
+		
+	}
+
+	private final void showNewRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+		
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/AddNewRoute.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private final void showAllRoutes(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/ViewAllRoutes.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 

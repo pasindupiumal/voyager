@@ -35,7 +35,7 @@
                         Route Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="voyager/Routes/AddNewRoute">Add New Route</a>
+                        <a class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
                     </div>
