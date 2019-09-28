@@ -30,7 +30,7 @@ public class RouteController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement JSP");
+		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement.");
 		
 		
 		final String action = request.getServletPath();
@@ -55,6 +55,33 @@ public class RouteController extends HttpServlet {
 
 		
 	}
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement.");
+		
+		
+		final String action = request.getServletPath();
+		System.out.println("Servlet path: " + action);
+		
+		try {
+			switch (action) {
+			
+				case "/Routes/InsertRoute":
+					insertRoute(request, response);
+					break;
+				
+				
+			
+			}
+		}
+		catch(SQLException e) {
+			LOGGER.log(Level.SEVERE, "SQL Exception: " + e.toString());
+		}
+
+		
+	}
 
 	private final void showNewRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
 		
@@ -68,4 +95,9 @@ public class RouteController extends HttpServlet {
 		
 	}
 
+	private final void insertRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+		
+		System.out.println("Insert route is triggered");
+		
+	}
 }
