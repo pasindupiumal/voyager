@@ -25,7 +25,7 @@ public class HomeController extends HttpServlet {
 		LOGGER.log(Level.INFO, "Control aquired by Home Controller. Re-directing control to /Routes");
 
 		//Re-direct to the RouteController servlet
-		response.sendRedirect(request.getContextPath() + "/Routes");
+		response.sendRedirect(request.getContextPath() + "/Routes/ViewAllRoutes");
 		
 	}
 
