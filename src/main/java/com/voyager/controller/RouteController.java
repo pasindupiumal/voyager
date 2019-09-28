@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sun.istack.internal.logging.Logger;
 import com.voyager.dao.Dao;
 import com.voyager.dao.DaoFactory;
+import com.voyager.dao.RouteDaoImpl;
+import com.voyager.methods.Methods;
 import com.voyager.model.Route;
 
 
@@ -76,7 +78,7 @@ public class RouteController extends HttpServlet {
 			
 			}
 		}
-		catch(SQLException e) {
+		catch(SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.SEVERE, "SQL Exception: " + e.toString());
 		}
 
@@ -100,9 +102,41 @@ public class RouteController extends HttpServlet {
 		
 	}
 
-	private final void insertRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+	private final void insertRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
 		System.out.println("Insert route is triggered");
+		final String routeName = request.getParameter("routeName");
+		final String routeNumber = request.getParameter("routeNumber");
+		final String origin = request.getParameter("origin");
+		final String destination = request.getParameter("destination");
+		final String routeOffice = request.getParameter("routeOffice");
+		final String totalDistance = request.getParameter("totalDistance");
+
+		final RequestDispatcher view = request.getRequestDispatcher("../jsp/AddNewRoute.jsp");
 		
+		request.setAttribute("routeName", routeName);
+		request.setAttribute("routeNumber", routeNumber);
+		request.setAttribute("origin",  origin);
+		request.setAttribute("destination",  destination);
+		request.setAttribute("routeOffice", routeOffice);
+		request.setAttribute("totalDistance", totalDistance);
+		final RouteDaoImpl dao = (RouteDaoImpl) daoFactory.getDataAcessObject("route");
+		
+		if(!Methods.isFloat(totalDistance)) {
+			request.setAttribute("error1", "<p style=\"color:red;\" > Please enter a valid number for total distance</p>");
+			view.forward(request, response);
+		}
+		else if(dao.isAdded(routeName, routeNumber)) {
+			request.setAttribute("error2", "<p style=\"color:red;\" > Route already exists</p>");
+			view.forward(request, response);
+		}
+		else {
+			final float totalDistanceFloat = Float.parseFloat(totalDistance);
+			final Route newRoute = new Route(routeName, routeNumber, origin, destination, routeOffice, totalDistanceFloat);
+			dao.create(newRoute);
+			response.sendRedirect("/voyager/Routes/ViewAllRoutes");
+		
+		}
+	
 	}
 }

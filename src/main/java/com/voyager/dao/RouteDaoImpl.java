@@ -187,4 +187,47 @@ public class RouteDaoImpl implements RouteDao{
 		
 	}
 
+	@Override
+	public boolean isAdded(String routeName, String routeNumber) throws SQLException {
+		//Retrieve routes given the routeID
+		final String sqlStatement1 = "SELECT * FROM routes where routeName = ? and routeNumber = ?";
+		
+		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
+		ps1.setString(1,  routeName);
+		ps1.setString(2, routeNumber);
+		
+		//Execute query and get the result set
+		final ResultSet rs1 = ps1.executeQuery(); 
+	
+		//Read from the result set
+		if( rs1.next() ) {
+			
+			//Close preapredStatement
+			if(ps1 != null) {
+				ps1.close();
+			}
+			
+			//Close result set
+			if(rs1 != null) {
+				rs1.close();
+			}
+			return true;
+			
+		}
+		else {
+			
+			//Close preapredStatement
+			if(ps1 != null) {
+				ps1.close();
+			}
+			
+			//Close result set
+			if(rs1 != null) {
+				rs1.close();
+			}
+			return false;
+		}
+				
+	}
+
 }

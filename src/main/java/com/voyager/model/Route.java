@@ -22,6 +22,16 @@ public class Route {
 		this.totalDistance = totalDistance;
 	}
 	
+	public Route(String routeName, String routeNumber, String origin, String destination, String routeOffice, float totalDistance) {
+		super();
+		this.routeName = routeName;
+		this.routeNumber = routeNumber;
+		this.origin = origin;
+		this.destination = destination;
+		this.routeOffice = routeOffice;
+		this.totalDistance = totalDistance;
+	}
+	
 
 	public int getRouteID() {
 		return routeID;

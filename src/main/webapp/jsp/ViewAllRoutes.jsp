@@ -108,7 +108,7 @@
                     <th scope="col">Origin</th>
                     <th scope="col">Destination</th>
                     <th scope="col">Route Office</th>
-                    <th scope="col">Total Distance</th>
+                    <th scope="col">Total Distance (KM)</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
