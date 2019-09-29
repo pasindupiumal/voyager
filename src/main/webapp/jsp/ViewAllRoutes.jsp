@@ -11,7 +11,7 @@
     <title>Add New Route</title>
     <meta charset="UTF-8">
     <title>Route Management System</title>
-    <style>
+    <style type="text/css">
         #insertBox {
 
             width: 90%;
@@ -25,6 +25,23 @@
             font-size: 18px;
         }
     </style>
+    
+    <script type="text/javascript">
+    
+    	function checkIt(){
+    		
+    		var selection = confirm("Are you sure you want to delete this route?");
+    		
+    		if (selection == true) {
+    		  
+    			form.submit();
+    		} 
+    		else{
+    			return false;
+    		}
+    	}
+    	
+    </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -125,7 +142,7 @@
 	                	<td> <c:out value="${route.totalDistance}"/></td>
 	                	<td> <a href="/voyager/Routes/UpdateRoute?id=<c:out value='${route.routeID}'/>"> Update </a> 
 	                		&nbsp;&nbsp;&nbsp; &nbsp;
-	                		<a style="color:red" href="/voyager/Routes/DeleteRoute?id=<c:out value='${route.routeID}'/>"> Delete </a>
+	                		<a style="color:red" href="/voyager/Routes/DeleteRoute?id=<c:out value='${route.routeID}'/>" onClick="return checkIt();"> Delete </a>
 	                	</td>
             		</tr>
             	</c:forEach>

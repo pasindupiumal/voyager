@@ -48,6 +48,9 @@ public class RouteController extends HttpServlet {
 				case "/Routes/ViewAllRoutes":
 					showAllRoutes(request, response);
 					break;
+				case "/Routes/DeleteRoute":
+					deleteRoute(request, response);
+					break;
 			
 			}
 		}
@@ -138,5 +141,16 @@ public class RouteController extends HttpServlet {
 		
 		}
 	
+	}
+	
+	private final void deleteRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		final RouteDaoImpl dao = (RouteDaoImpl) daoFactory.getDataAcessObject("route");
+		final int routeID = Integer.parseInt(request.getParameter("id"));
+		final Route deleteRoute = new Route(routeID);
+		dao.delete(deleteRoute);
+		
+		response.sendRedirect("/voyager/Routes/ViewAllRoutes");
+		
 	}
 }

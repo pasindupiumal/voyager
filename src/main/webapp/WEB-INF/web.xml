@@ -33,6 +33,10 @@
   		<url-pattern>/Routes/InsertRoute</url-pattern>
   	</servlet-mapping>
   	<servlet-mapping>
+  		<servlet-name>RouteController</servlet-name>
+  		<url-pattern>/Routes/DeleteRoute</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
   		<servlet-name>HomeController</servlet-name>
   		<url-pattern>/</url-pattern>
   	</servlet-mapping>

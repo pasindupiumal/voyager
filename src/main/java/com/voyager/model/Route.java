@@ -10,6 +10,11 @@ public class Route {
 	private String routeOffice;
 	private float totalDistance;
 	
+	public Route(int routeID) {
+		super();
+		this.routeID = routeID;
+	}
+	
 	
 	public Route(int routeID, String routeName, String routeNumber, String origin, String destination, String routeOffice, float totalDistance) {
 		super();
