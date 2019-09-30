@@ -42,6 +42,15 @@
     		}
     	}
     	
+    	function goBack(){
+    		
+    		location.href="/voyager/Routes/ViewAllRoutes";
+    	}
+    	
+    	function clear(){
+    		
+    		document.getElementByName("routeName").reset();
+    	}
     </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -156,7 +165,7 @@
            	${requestScope["error2"]}
            	<br/>
            	<div class="form-group">
-                <button type="button" class="btn btn-primary col-md-1">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <button type="button" class="btn btn-primary col-md-1" onClick="goBack();">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                 <button type="button" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
                 <button type="submit" class="btn btn-success col-md-2"  onclick="return checkIt();">Update Route</button>
             </div>
