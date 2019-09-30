@@ -3,6 +3,7 @@ package com.voyager.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import javax.servlet.RequestDispatcher;
@@ -50,6 +51,9 @@ public class RouteController extends HttpServlet {
 					break;
 				case "/Routes/DeleteRoute":
 					deleteRoute(request, response);
+					break;
+				case "/Routes/UpdateRoute":
+					showUpdateRoute(request, response);
 					break;
 			
 			}
@@ -152,5 +156,26 @@ public class RouteController extends HttpServlet {
 		
 		response.sendRedirect("/voyager/Routes/ViewAllRoutes");
 		
+	}
+	
+	private final void showUpdateRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		final RouteDaoImpl dao = (RouteDaoImpl) daoFactory.getDataAcessObject("route");
+		final int routeID = Integer.parseInt(request.getParameter("id"));
+		final Optional<Route> updateRoute = dao.find(routeID);
+		final Route routeToUpdate = updateRoute.get();
+		
+		final RequestDispatcher updateView = request.getRequestDispatcher("../jsp/UpdateRoute.jsp");
+		
+		request.setAttribute("routeID", routeToUpdate.getRouteID());
+		request.setAttribute("routeName", routeToUpdate.getRouteName());
+		request.setAttribute("routeNumber", routeToUpdate.getRouteNumber());
+		request.setAttribute("origin",  routeToUpdate.getOrigin());
+		request.setAttribute("destination",  routeToUpdate.getDestination());
+		request.setAttribute("routeOffice", routeToUpdate.getRouteOffice());
+		request.setAttribute("totalDistance", routeToUpdate.getTotalDistance());
+		
+		
+		updateView.forward(request, response);
 	}
 }
