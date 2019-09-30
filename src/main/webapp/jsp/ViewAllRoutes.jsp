@@ -8,9 +8,8 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <title>Add New Route</title>
+    <title>View Routes</title>
     <meta charset="UTF-8">
-    <title>Route Management System</title>
     <style type="text/css">
         #insertBox {
 

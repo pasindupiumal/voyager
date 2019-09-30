@@ -10,7 +10,6 @@
 
     <title>Add New Route</title>
     <meta charset="UTF-8">
-    <title>Route Management System</title>
     <style>
         #insertBox {
 
@@ -136,8 +135,8 @@
            	${requestScope["error2"]}
            	<br/>
            	<div class="form-group">
-                <button type="submit" class="btn btn-primary col-md-1">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                <button type="submit" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                <button type="button" class="btn btn-primary col-md-1">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <button type="button" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
                 <button type="submit" class="btn btn-success col-md-1">Add Route</button>
             </div>
             

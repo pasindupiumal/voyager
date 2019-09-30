@@ -8,9 +8,8 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <title>Add New Route</title>
+    <title>Update Route</title>
     <meta charset="UTF-8">
-    <title>Route Management System</title>
     <style>
         #insertBox {
 
@@ -27,6 +26,23 @@
         
 
     </style>
+    
+    <script type="text/javascript">
+    
+    	function checkIt(){
+    		
+    		var selection = confirm("Are you sure you want to proceed?");
+    		
+    		if (selection == true) {
+    		  
+    			form.submit();
+    		} 
+    		else{
+    			return false;
+    		}
+    	}
+    	
+    </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -101,7 +117,7 @@
 
     <div id="insertBox">
 
-        <form action="/voyager/Routes/InsertRoute" method="post">
+        <form action="/voyager/Routes/UpdateRoute" method="post">
         	<div class="form-group">
                 <label for="routeID">Route ID</label>
                 <input type="text" class="form-control" id="routeID" name="routeID" value=${requestScope["routeID"]} readonly>
@@ -140,9 +156,9 @@
            	${requestScope["error2"]}
            	<br/>
            	<div class="form-group">
-                <button type="submit" class="btn btn-primary col-md-1">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                <button type="submit" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-                <button type="submit" class="btn btn-success col-md-1">Add Route</button>
+                <button type="button" class="btn btn-primary col-md-1">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <button type="button" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                <button type="submit" class="btn btn-success col-md-2"  onclick="return checkIt();">Update Route</button>
             </div>
             
         </form>
