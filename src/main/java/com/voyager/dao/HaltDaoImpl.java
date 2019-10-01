@@ -104,6 +104,7 @@ public class HaltDaoImpl implements HalfDao{
 		ps1.setInt(1, halt.getRouteID());
 		ps1.setString(2, halt.getHaltName());
 		ps1.setFloat(3, halt.getPrice());
+		ps1.setInt(4, halt.getHaltID());
 		
 		//Update row and get confirmation
 		rowUpdated = ps1.executeUpdate() > 0;

@@ -27,5 +27,20 @@ public class Methods {
         return true;
     }
     
+    public static boolean isInteger(String inputString){
+        
+        try{
+            Integer.parseInt(inputString);
+        }
+        catch(NumberFormatException e){
+            return false;
+        }
+        catch(NullPointerException e){
+            return false;
+        }
+        
+        return true;
+    }
+    
     
 }
