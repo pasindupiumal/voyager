@@ -122,7 +122,7 @@ public class RouteDaoImpl implements RouteDao{
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
 		
 		ps1.setString(1,  route.getRouteName());
-		ps1.setString(2,  route.getRouteName());
+		ps1.setString(2,  route.getRouteNumber());
 		ps1.setString(3,  route.getOrigin());
 		ps1.setString(4,  route.getDestination());
 		ps1.setString(5,  route.getRouteOffice());
@@ -149,7 +149,7 @@ public class RouteDaoImpl implements RouteDao{
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
 		
 		ps1.setString(1,  route.getRouteName());
-		ps1.setString(2,  route.getRouteName());
+		ps1.setString(2,  route.getRouteNumber());
 		ps1.setString(3,  route.getOrigin());
 		ps1.setString(4,  route.getDestination());
 		ps1.setString(5,  route.getRouteOffice());
