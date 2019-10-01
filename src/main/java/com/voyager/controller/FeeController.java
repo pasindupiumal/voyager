@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sun.istack.internal.logging.Logger;
 import com.voyager.dao.Dao;
 import com.voyager.dao.DaoFactory;
+import com.voyager.dao.HaltDaoImpl;
+import com.voyager.model.Halt;
 import com.voyager.model.RouteHalt;
 
 
@@ -42,8 +44,13 @@ public class FeeController extends HttpServlet {
 				case "/Fees/ViewAllRoutes":
 					showViewAllRoutes(request, response);
 					break;
+				case "/Fees/DeleteHalt":
+					deleteHalt(request, response);
+					break;
 			
 			}
+			
+			
 		}
 		catch(SQLException | ClassNotFoundException e) {
 			LOGGER.log(Level.SEVERE, "SQL Exception: " + e.toString());
@@ -65,6 +72,17 @@ public class FeeController extends HttpServlet {
 		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/FeesViewAllRoutes.jsp");
 		request.setAttribute("routeList", routeHaltList);
 		dispatcher.forward(request, response);
+		
+	}
+	
+	private final void deleteHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		final Dao dao = (HaltDaoImpl) daoFactory.getDataAcessObject("Halt");
+		final int haltID = Integer.parseInt(request.getParameter("id"));
+		final Halt deleteHalt = new Halt(haltID);
+		dao.delete(deleteHalt);
+		
+		response.sendRedirect("/voyager/Fees/ViewAllRoutes");
 		
 	}
 

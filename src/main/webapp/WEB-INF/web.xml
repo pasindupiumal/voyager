@@ -54,6 +54,14 @@
   		<servlet-name>FeeController</servlet-name>
   		<url-pattern>/Fees/ViewAllRoutes</url-pattern>
   	</servlet-mapping>
+  	<servlet-mapping>
+  		<servlet-name>FeeController</servlet-name>
+  		<url-pattern>/Fees/UpdateHalt</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
+  		<servlet-name>FeeController</servlet-name>
+  		<url-pattern>/Fees/DeleteHalt</url-pattern>
+  	</servlet-mapping>
   		
 </web-app>
 

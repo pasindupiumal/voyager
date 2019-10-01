@@ -154,9 +154,9 @@
 	                	<td>
 	                		<c:forEach var="halt" items="${route.haltList}">
 	                			<p>			
-		                			<a href="/voyager/Routes/UpdateRoute?id=<c:out value='${halt.haltID}'/>"> Update </a> 
+		                			<a href="/voyager/Fees/UpdateHalt?id=<c:out value='${halt.haltID}'/>"> Update </a> 
 			                		&nbsp;&nbsp;&nbsp; &nbsp;
-			                		<a style="color:red" href="/voyager/Routes/DeleteRoute?id=<c:out value='${halt.haltID}'/>" onClick="return checkIt();"> Delete </a>
+			                		<a style="color:red" href="/voyager/Fees/DeleteHalt?id=<c:out value='${halt.haltID}'/>" onClick="return checkIt();"> Delete </a>
 	                			 </p>
 	                		</c:forEach>
 	                	</td>
