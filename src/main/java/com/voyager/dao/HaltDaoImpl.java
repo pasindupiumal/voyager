@@ -185,8 +185,8 @@ public class HaltDaoImpl implements HalfDao{
 		
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
 		ps1.setInt(1, routeID);
-		ps2.setString(2, haltName);
-		ps3.setFloat(3, price);
+		ps1.setString(2, haltName);
+		ps1.setFloat(3, price);
 		
 		//Execute query and get the result set
 		final ResultSet rs1 = ps1.executeQuery(); 
