@@ -136,7 +136,7 @@ public class RouteController extends HttpServlet {
 			request.setAttribute("error1", "<p style=\"color:red;\" > Please enter a valid number for total distance</p>");
 			view.forward(request, response);
 		}
-		else if(dao.isAdded(routeName, routeNumber)) {
+		else if(dao.isAdded(routeName, routeNumber, routeOffice, Float.parseFloat(totalDistance))) {
 			request.setAttribute("error2", "<p style=\"color:red;\" > Route already exists</p>");
 			view.forward(request, response);
 		}

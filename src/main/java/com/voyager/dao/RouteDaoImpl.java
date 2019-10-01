@@ -188,13 +188,15 @@ public class RouteDaoImpl implements RouteDao{
 	}
 
 	@Override
-	public boolean isAdded(String routeName, String routeNumber) throws SQLException {
+	public boolean isAdded(String routeName, String routeNumber, String routeOffice, Float totalDistance) throws SQLException {
 		//Retrieve routes given the routeID
-		final String sqlStatement1 = "SELECT * FROM routes where routeName = ? and routeNumber = ?";
+		final String sqlStatement1 = "SELECT * FROM routes where routeName = ? and routeNumber = ? and routeOffice=? and totalDistance=?";
 		
 		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
 		ps1.setString(1,  routeName);
 		ps1.setString(2, routeNumber);
+		ps1.setString(3, routeOffice);
+		ps1.setFloat(4,  totalDistance);
 		
 		//Execute query and get the result set
 		final ResultSet rs1 = ps1.executeQuery(); 
@@ -230,4 +232,58 @@ public class RouteDaoImpl implements RouteDao{
 				
 	}
 
+	@Override
+	public Optional<Route> findByName(String routeName, String routeNumber, String routeOffice, Float totalDistance) throws SQLException { 
+	
+		//Retrieve routes given the routeID
+		final String sqlStatement1 = "SELECT * FROM routes where routeName = ? and routeNumber = ? and routeOffice=? and totalDistance=?";
+		
+		final PreparedStatement ps1 = connection.prepareStatement(sqlStatement1);
+		ps1.setString(1,  routeName);
+		ps1.setString(2, routeNumber);
+		ps1.setString(3, routeOffice);
+		ps1.setFloat(4,  totalDistance);
+		
+		//Execute query and get the result set
+		final ResultSet rs1 = ps1.executeQuery(); 
+		
+		//Create temporary variables to hold result set values
+		int routeID2 = 0;
+		String routeName2 = null;
+		String routeNumber2 = null;
+		String origin2 = null;
+		String destination2 = null;
+		String routeOffice2 = null;
+		float totalDistance2 = 0;
+	
+		//Read from the result set
+		while( rs1.next() ) {
+			
+			routeID2 = rs1.getInt("routeID");
+			routeName2 = rs1.getString("routeName");
+			routeNumber2 = rs1.getString("routeNumber");
+			origin2 = rs1.getString("origin");
+			destination2 = rs1.getString("destination");
+			routeOffice2 = rs1.getString("routeOffice");
+			totalDistance2 = rs1.getFloat("totalDistance");
+			
+		}
+		
+		//Close preapredStatement
+		if(ps1 != null) {
+			ps1.close();
+		}
+		
+		//Close result set
+		if(rs1 != null) {
+			
+			rs1.close();
+		}
+		
+		//Create and return Route object
+		return Optional.of(new Route(routeID2, routeName2, routeNumber2, origin2, destination2, routeOffice2, totalDistance2));
+		
+	}
+
 }
+	
