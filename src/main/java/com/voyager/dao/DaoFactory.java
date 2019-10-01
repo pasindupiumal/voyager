@@ -16,6 +16,9 @@ public class DaoFactory {
 			
 			return new RouteDaoImpl();
 		}
+		else if(daoType.equalsIgnoreCase("Halt")) {
+			return new HaltDaoImpl();
+		}
 		
 		throw new IllegalArgumentException("Invalid DAO type passed to DaoFactory. Doesn't exist");
 		

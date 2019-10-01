@@ -182,6 +182,11 @@ public class RouteDaoImpl implements RouteDao{
 		//Delete the row and get confirmation
 		rowDeleted = ps1.executeUpdate() > 0;
 		
+		//Close preapredStatement
+		if(ps1 != null) {
+			ps1.close();
+		}
+		
 		return rowDeleted;
 		
 		
