@@ -125,21 +125,24 @@
         <form action="/voyager/Fees/UpdateHalt" method="post">
         	<div class="form-group">
                 <label for="haltID">Halt ID</label>
-                <input type="text" class="form-control" id="haltID" name="haltID" value=${requestScope["haltID"]} readonly>
+                <input type="text" class="form-control" id="haltID" name="haltID" value="${requestScope['haltID']}" readonly>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="routeID">Route ID</label>
-                    <input type="text" class="form-control" id="routeID" name="routeID" placeholder="Route ID" required value=${requestScope["routeID"]}>
+                    <input type="text" class="form-control" id="routeID" name="routeID" placeholder="Route ID" required value="${requestScope['routeID']}">
+                	${requestScope["error1"]}
+           	<br/>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="haltName">Halt Name</label>
-                    <input type="text" class="form-control" id="haltName" name="haltName" required value=${requestScope["haltName"]}>
+                    <input type="text" class="form-control" id="haltName" name="haltName" required value="${requestScope['haltName']}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="price">Price For The Stop</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Price for halt" required value=${requestScope["price"]}>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Price for halt" required value="${requestScope['price']}">
+
             </div>
            	${requestScope["error2"]}
            	<br/>

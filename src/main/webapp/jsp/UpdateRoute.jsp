@@ -129,34 +129,34 @@
         <form action="/voyager/Routes/UpdateRoute" method="post">
         	<div class="form-group">
                 <label for="routeID">Route ID</label>
-                <input type="text" class="form-control" id="routeID" name="routeID" value=${requestScope["routeID"]} readonly>
+                <input type="text" class="form-control" id="routeID" name="routeID" value="${requestScope['routeID']}" readonly>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="routeName">Route Name</label>
-                    <input type="text" class="form-control" id="routeName" name="routeName" placeholder="Route Name" required value=${requestScope["routeName"]}>
+                    <input type="text" class="form-control" id="routeName" name="routeName" placeholder="Route Name" required value="${requestScope['routeName']}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="routeNumber">Route Number</label>
-                    <input type="text" class="form-control" id="routeNumber" name="routeNumber" placeholder="Route Number" required value=${requestScope["routeNumber"]}>
+                    <input type="text" class="form-control" id="routeNumber" name="routeNumber" placeholder="Route Number" required value="${requestScope['routeNumber']}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="origin">Origin</label>
-                <input type="text" class="form-control" id="origin" name="origin" placeholder="Origin" required value=${requestScope["origin"]}>
+                <input type="text" class="form-control" id="origin" name="origin" placeholder="Origin" required value="${requestScope['origin']}">
             </div>
             <div class="form-group">
                 <label for="inputAddress2">Destination</label>
-                <input type="text" class="form-control" id="destination" name="destination" placeholder="Destination" required value=${requestScope["destination"]}>
+                <input type="text" class="form-control" id="destination" name="destination" placeholder="Destination" required value="${requestScope['destination']}">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="routeOffice">Route Office</label>
-                    <input type="text" class="form-control" name="routeOffice" id="routeOffice" placeholder="Route Office" required value=${requestScope["routeOffice"]}>
+                    <input type="text" class="form-control" name="routeOffice" id="routeOffice" placeholder="Route Office" required value="${requestScope['routeOffice']}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="routeDistance">Total Route Distance</label>
-                    <input type="text" class="form-control" name="totalDistance" placeholder="Total Distance" id="totalDistance" required value=${requestScope["totalDistance"]}>
+                    <input type="text" class="form-control" name="totalDistance" placeholder="Total Distance" id="totalDistance" required value="${requestScope['totalDistance']}">
                     ${requestScope["error1"]}
                 </div>
             </div>

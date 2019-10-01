@@ -123,9 +123,8 @@ public class FeeController extends HttpServlet {
 		request.setAttribute("haltID", haltToUpdate.getHaltID());
 		request.setAttribute("routeID", haltToUpdate.getRouteID());
 		request.setAttribute("haltName", haltToUpdate.getHaltName());
-		//request.setAttribute("haltName", "Hello World is here");
-		System.out.println("Halt Name " + haltToUpdate.getHaltName());
 		request.setAttribute("price", haltToUpdate.getPrice());
+		
 		
 		updateView.forward(request, response);
 	}
@@ -152,7 +151,7 @@ public class FeeController extends HttpServlet {
 			view.forward(request, response);
 		}
 		else if(!Methods.isFloat(price)) {
-			request.setAttribute("error1", "<p style=\"color:red;\" > Please enter a valid number price</p>");
+			request.setAttribute("error2", "<p style=\"color:red;\" > Please enter a valid number price</p>");
 			view.forward(request, response);
 		}
 		else {
