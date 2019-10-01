@@ -74,12 +74,12 @@ public class RouteHaltDaoImpl implements RouteHaltDao {
 			
 			//Close preapredStatement
 			if(ps2 != null) {
-				ps1.close();
+				ps2.close();
 			}
 			
 			//Close result set
 			if(rs2 != null) {
-				rs1.close();
+				rs2.close();
 			}
 			
 			routeHaltList.add(newRouteHalt);

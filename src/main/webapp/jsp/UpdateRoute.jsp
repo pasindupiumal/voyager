@@ -81,7 +81,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a style="color:white; font-weight: bold" class="nav-link" href="#">Fee Management</a>
+                    <a style="color:white; font-weight: bold" class="nav-link" href="/voyager/Fees/ViewAllRoutes">Fee Management</a>
                 </li>
 
                 <li class="nav-item dropdown">

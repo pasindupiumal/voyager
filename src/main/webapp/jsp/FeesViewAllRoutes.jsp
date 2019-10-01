@@ -8,30 +8,36 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <title>Add New Route</title>
+    <title>View Routes</title>
     <meta charset="UTF-8">
-    <style>
+    <style type="text/css">
         #insertBox {
 
-            width: 70%;
+            width: 90%;
             margin-left: auto;
             margin-right: auto;
             margin-top: 5%;
         }
-        
-        header {
-        
-        	font-size: 18px;
-        }
-        
 
+        header {
+
+            font-size: 18px;
+        }
     </style>
     
-    <script type="text/javascript"> 
-    	
-    	function goBack(){
+    <script type="text/javascript">
+    
+    	function checkIt(){
     		
-    		location.href="/voyager/Routes/ViewAllRoutes";
+    		var selection = confirm("Are you sure you want to delete this route?");
+    		
+    		if (selection == true) {
+    		  
+    			form.submit();
+    		} 
+    		else{
+    			return false;
+    		}
     	}
     	
     </script>
@@ -58,9 +64,9 @@
                         Route Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a  class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
+                        <a class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
                         <div class="dropdown-divider"></div>
-                        <a  class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
+                        <a class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -109,48 +115,42 @@
 
     <div id="insertBox">
 
-        <form action="/voyager/Routes/InsertRoute" method="post">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="routeName">Route Name</label>
-                    <input type="text" class="form-control" id="routeName" name="routeName" placeholder="Route Name" required value=${requestScope["routeName"]}>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="routeNumber">Route Number</label>
-                    <input type="text" class="form-control" id="routeNumber" name="routeNumber" placeholder="Route Number" required value=${requestScope["routeNumber"]}>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="origin">Origin</label>
-                <input type="text" class="form-control" id="origin" name="origin" placeholder="Origin" required value=${requestScope["origin"]}>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Destination</label>
-                <input type="text" class="form-control" id="destination" name="destination" placeholder="Destination" required value=${requestScope["destination"]}>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="routeOffice">Route Office</label>
-                    <input type="text" class="form-control" name="routeOffice" id="routeOffice" placeholder="Route Office" required value=${requestScope["routeOffice"]}>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="routeDistance">Total Route Distance</label>
-                    <input type="text" class="form-control" name="totalDistance" placeholder="Total Distance" id="totalDistance" required value=${requestScope["totalDistance"]}>
-                    ${requestScope["error1"]}
-                </div>
-            </div>
-           	<br/>
-           	<br/>
-           	${requestScope["error2"]}
-           	<br/>
-           	<div class="form-group">
-                <button type="button" class="btn btn-primary col-md-1" onClick="goBack();">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                <button type="button" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-                <button type="submit" class="btn btn-success col-md-1">Add Route</button>
-            </div>
-            
-        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Route ID</th>
+                    <th scope="col">Route Name</th>
+                    <th scope="col">Route Number</th>
+                    <th scope="col">Total Distance (KM)</th>
+                    <th scope="col">Halts</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            	
+            	<c:forEach var="route" items="${routeList}">
+            		<tr>
+            			<td> <c:out value="${route.routeID}"/></td>
+	                	<td> <c:out value="${route.routeName}"/></td>
+	                	<td> <c:out value="${route.routeNumber}"/></td>
+	                	<td> <c:out value="${route.totalDistance}"/></td>
+	                	<td>
+	                		<c:forEach var="halt" items="${route.haltList}">
+	                			<p> <c:out value="${halt.haltName}"/> </p>
+	                		</c:forEach>
+	                	</td>
+	                	<td> <a href="/voyager/Routes/UpdateRoute?id=<c:out value='${route.routeID}'/>"> Update </a> 
+	                		&nbsp;&nbsp;&nbsp; &nbsp;
+	                		<a style="color:red" href="/voyager/Routes/DeleteRoute?id=<c:out value='${route.routeID}'/>" onClick="return checkIt();"> Delete </a>
+	                	</td>
+            		</tr>
+            	</c:forEach>
+
+            </tbody>
+        </table>
     </div>
+
+
 
 </body>
 
