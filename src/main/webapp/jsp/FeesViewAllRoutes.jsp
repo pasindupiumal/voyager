@@ -122,7 +122,9 @@
                     <th scope="col">Route Name</th>
                     <th scope="col">Route Number</th>
                     <th scope="col">Total Distance (KM)</th>
-                    <th scope="col">Halts</th>
+                    <th scope="col">Halt ID</th>
+                    <th scope="col">Halt Name</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -136,7 +138,17 @@
 	                	<td> <c:out value="${route.totalDistance}"/></td>
 	                	<td>
 	                		<c:forEach var="halt" items="${route.haltList}">
+	                			<p> <c:out value="${halt.haltID}"/> </p>
+	                		</c:forEach>
+	                	</td>
+	                	<td>
+	                		<c:forEach var="halt" items="${route.haltList}">
 	                			<p> <c:out value="${halt.haltName}"/> </p>
+	                		</c:forEach>
+	                	</td>
+	                	<td>
+	                		<c:forEach var="halt" items="${route.haltList}">
+	                			<p> <c:out value="${halt.price}"/> </p>
 	                		</c:forEach>
 	                	</td>
 	                	<td> <a href="/voyager/Routes/UpdateRoute?id=<c:out value='${route.routeID}'/>"> Update </a> 
