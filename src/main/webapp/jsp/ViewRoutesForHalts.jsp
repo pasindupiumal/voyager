@@ -13,7 +13,7 @@
     <style type="text/css">
         #insertBox {
 
-            width: 90%;
+            width: 75%;
             margin-left: auto;
             margin-right: auto;
             margin-top: 5%;
@@ -69,7 +69,6 @@
                         <a class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
                     </div>
                 </li>
-                
                 <li class="nav-item dropdown">
                     <a style="color:white; font-weight: bold" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Fee Management
@@ -129,10 +128,8 @@
                     <th scope="col">Route ID</th>
                     <th scope="col">Route Name</th>
                     <th scope="col">Route Number</th>
+                    <th scope="col">Route Office</th>
                     <th scope="col">Total Distance (KM)</th>
-                    <th scope="col">Halt ID</th>
-                    <th scope="col">Halt Name</th>
-                    <th scope="col">Price</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -143,30 +140,10 @@
             			<td> <c:out value="${route.routeID}"/></td>
 	                	<td> <c:out value="${route.routeName}"/></td>
 	                	<td> <c:out value="${route.routeNumber}"/></td>
+	                	<td> <c:out value="${route.routeOffice}"/></td>
 	                	<td> <c:out value="${route.totalDistance}"/></td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p> <c:out value="${halt.haltID}"/> </p>
-	                		</c:forEach>
-	                	</td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p> <c:out value="${halt.haltName}"/> </p>
-	                		</c:forEach>
-	                	</td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p> <c:out value="${halt.price}"/> </p>
-	                		</c:forEach>
-	                	</td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p>			
-		                			<a href="/voyager/Fees/UpdateHalt?id=<c:out value='${halt.haltID}'/>"> Update </a> 
-			                		&nbsp;&nbsp;&nbsp; &nbsp;
-			                		<a style="color:red" href="/voyager/Fees/DeleteHalt?id=<c:out value='${halt.haltID}'/>" onClick="return checkIt();"> Delete </a>
-	                			 </p>
-	                		</c:forEach>
+	                	<td> <a href="/voyager/Fees/InsertHalt?id=<c:out value='${route.routeID}'/>"> Insert New Halt </a> 
+	                		&nbsp;&nbsp;&nbsp; &nbsp;
 	                	</td>
             		</tr>
             	</c:forEach>

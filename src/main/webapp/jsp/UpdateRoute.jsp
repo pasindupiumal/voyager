@@ -80,8 +80,15 @@
                         <a  class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a style="color:white; font-weight: bold" class="nav-link" href="/voyager/Fees/ViewAllRoutes">Fee Management</a>
+                <li class="nav-item dropdown">
+                    <a style="color:white; font-weight: bold" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Fee Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a  class="dropdown-item" href="/voyager/Fees/SelectRoute">Add New Halt</a>
+                        <div class="dropdown-divider"></div>
+                        <a  class="dropdown-item" href="/voyager/Fees/ViewAllRoutes">Fee Management</a>
+                    </div>
                 </li>
 
                 <li class="nav-item dropdown">

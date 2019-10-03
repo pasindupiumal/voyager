@@ -8,36 +8,30 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <title>View Routes</title>
+    <title>Add New Halt</title>
     <meta charset="UTF-8">
-    <style type="text/css">
+    <style>
         #insertBox {
 
-            width: 90%;
+            width: 60%;
             margin-left: auto;
             margin-right: auto;
             margin-top: 5%;
         }
-
+        
         header {
-
-            font-size: 18px;
+        
+        	font-size: 18px;
         }
+        
+
     </style>
     
-    <script type="text/javascript">
-    
-    	function checkIt(){
+    <script type="text/javascript"> 
+    	
+    	function goBack(){
     		
-    		var selection = confirm("Are you sure you want to delete this route?");
-    		
-    		if (selection == true) {
-    		  
-    			form.submit();
-    		} 
-    		else{
-    			return false;
-    		}
+    		location.href="/voyager/Routes/ViewAllRoutes";
     	}
     	
     </script>
@@ -64,9 +58,9 @@
                         Route Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
+                        <a  class="dropdown-item" href="/voyager/Routes/AddNewRoute">Add New Route</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
+                        <a  class="dropdown-item" href="/voyager/Routes/ViewAllRoutes">View All Routes</a>
                     </div>
                 </li>
                 
@@ -80,7 +74,7 @@
                         <a  class="dropdown-item" href="/voyager/Fees/ViewAllRoutes">Fee Management</a>
                     </div>
                 </li>
-
+                
                 <li class="nav-item dropdown">
                     <a style="color:white; font-weight: bold" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         User Management
@@ -123,59 +117,39 @@
 
     <div id="insertBox">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Route ID</th>
-                    <th scope="col">Route Name</th>
-                    <th scope="col">Route Number</th>
-                    <th scope="col">Total Distance (KM)</th>
-                    <th scope="col">Halt ID</th>
-                    <th scope="col">Halt Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            	
-            	<c:forEach var="route" items="${routeList}">
-            		<tr>
-            			<td> <c:out value="${route.routeID}"/></td>
-	                	<td> <c:out value="${route.routeName}"/></td>
-	                	<td> <c:out value="${route.routeNumber}"/></td>
-	                	<td> <c:out value="${route.totalDistance}"/></td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p> <c:out value="${halt.haltID}"/> </p>
-	                		</c:forEach>
-	                	</td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p> <c:out value="${halt.haltName}"/> </p>
-	                		</c:forEach>
-	                	</td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p> <c:out value="${halt.price}"/> </p>
-	                		</c:forEach>
-	                	</td>
-	                	<td>
-	                		<c:forEach var="halt" items="${route.haltList}">
-	                			<p>			
-		                			<a href="/voyager/Fees/UpdateHalt?id=<c:out value='${halt.haltID}'/>"> Update </a> 
-			                		&nbsp;&nbsp;&nbsp; &nbsp;
-			                		<a style="color:red" href="/voyager/Fees/DeleteHalt?id=<c:out value='${halt.haltID}'/>" onClick="return checkIt();"> Delete </a>
-	                			 </p>
-	                		</c:forEach>
-	                	</td>
-            		</tr>
-            	</c:forEach>
+        <form action="/voyager/Fees/InsertHalt" method="post">
+            
+            <div class="form-group">
+                <label for="routeID">Route ID</label>
+                <input type="text" class="form-control" id="routeID" name="routeID" placeholder="Route ID" readonly value="${routeID}">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="haltName">Halt Name</label>
+                    <input type="text" class="form-control" id="haltName" name="haltName" placeholder="Halt Name" required value="${requestScope['haltName']}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="price">Price For The Halt</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Price For The Halt" required value="${requestScope['price']}">
+                    ${requestScope["error1"]}
+                    <br/>
+                    <br/>
+                </div>
+            </div>
 
-            </tbody>
-        </table>
+           	<br/>
+           	<br/>
+           	${requestScope["error2"]}
+           	<br/>
+           	<div class="form-group">
+                <button type="button" class="btn btn-primary col-md-1" onClick="goBack();">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <button type="button" class="btn btn-danger col-md-1">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                <button type="submit" class="btn btn-success col-md-1">Add Halt</button>
+            </div>
+            
+        </form>
     </div>
-
-
 
 </body>
 

@@ -16,8 +16,10 @@ import com.sun.istack.internal.logging.Logger;
 import com.voyager.dao.Dao;
 import com.voyager.dao.DaoFactory;
 import com.voyager.dao.HaltDaoImpl;
+import com.voyager.dao.RouteDaoImpl;
 import com.voyager.methods.Methods;
 import com.voyager.model.Halt;
+import com.voyager.model.Route;
 import com.voyager.model.RouteHalt;
 
 
@@ -52,6 +54,12 @@ public class FeeController extends HttpServlet {
 				case "/Fees/UpdateHalt":
 					showUpdateHalt(request, response);
 					break;
+				case "/Fees/SelectRoute":
+					showSelectRoute(request, response);
+					break;
+				case "/Fees/InsertHalt":
+					showInsertHalt(request, response);
+					break;
 			
 			}
 			
@@ -76,9 +84,10 @@ public class FeeController extends HttpServlet {
 			
 				case "/Fees/UpdateHalt":
 					updateHalt(request, response);
+					break;		
+				case "/Fees/InsertHalt":
+					insertHalt(request, response);
 					break;
-				
-				
 			
 			}
 			
@@ -160,6 +169,59 @@ public class FeeController extends HttpServlet {
 			
 			final Halt newHalt = new Halt(haltID, routeIDInt, haltName, priceFloat);
 			dao.update(newHalt);
+			response.sendRedirect("/voyager/Fees/ViewAllRoutes");
+		
+		}
+	
+	}
+	
+	private final void showSelectRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		final Dao dao = daoFactory.getDataAcessObject("route");
+		final List<Route> routeList = dao.findAll();
+		
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/ViewRoutesForHalts.jsp");
+		request.setAttribute("routeList", routeList);
+		dispatcher.forward(request, response);
+	}
+	
+	private final void showInsertHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/AddNewHalt.jsp");
+		request.setAttribute("routeID", request.getParameter("id"));
+		dispatcher.forward(request, response);
+	}
+	
+	private final void insertHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		System.out.println("Insert route is triggered");
+		final String routeIDString = request.getParameter("routeID");
+		System.out.println("Route ID: " + routeIDString);
+		final int routeID = Integer.parseInt(request.getParameter("routeID"));
+		
+		final String haltName = request.getParameter("haltName");
+		final String priceString = request.getParameter("price");
+
+		final RequestDispatcher view = request.getRequestDispatcher("../jsp/AddNewHalt.jsp");
+		
+		request.setAttribute("routeID", routeID);
+		request.setAttribute("haltName", haltName);
+		request.setAttribute("price", priceString);
+		
+		final Dao dao = (HaltDaoImpl) daoFactory.getDataAcessObject("Halt");
+		
+		if(!Methods.isFloat(priceString)) {
+			request.setAttribute("error1", "<p style=\"color:red;\" > Please enter a valid number for price</p>");
+			view.forward(request, response);
+		}
+		else if(((HaltDaoImpl) dao).isAdded(routeID, haltName, Float.parseFloat(priceString))) {
+			request.setAttribute("error2", "<p style=\"color:red;\" > Halt has already been added to this route</p>");
+			view.forward(request, response);
+		}
+		else {
+			final float price = Float.parseFloat(priceString);
+			final Halt newHalt = new Halt(routeID, haltName, price);
+			dao.create(newHalt);
 			response.sendRedirect("/voyager/Fees/ViewAllRoutes");
 		
 		}
