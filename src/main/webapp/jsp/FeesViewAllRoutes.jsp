@@ -8,7 +8,7 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <title>View Routes</title>
+    <title>Routes With Fees</title>
     <meta charset="UTF-8">
     <style type="text/css">
         #insertBox {

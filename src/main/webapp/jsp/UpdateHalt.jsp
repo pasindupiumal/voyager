@@ -8,7 +8,7 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <title>Update Route</title>
+    <title>Update Halt</title>
     <meta charset="UTF-8">
     <style>
         #insertBox {

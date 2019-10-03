@@ -31,7 +31,7 @@
     	
     	function goBack(){
     		
-    		location.href="/voyager/Routes/ViewAllRoutes";
+    		location.href="/voyager/Fees/SelectRoute";
     	}
     	
     </script>
