@@ -2,8 +2,16 @@ package com.voyager.database;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.logging.Level;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
+
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.sun.istack.internal.logging.Logger;
 
 
@@ -37,20 +45,56 @@ public class DBConnection {
 	
 	public final Connection getConnection() throws ClassNotFoundException, SQLException{
 		
+		InputStream input = null;
+		
 		try {
 			
 			LOGGER.log(Level.INFO, "Retrieving new connection from mysql");
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/voyager", "root", "");
-			return connection;
-		}
-		catch(ClassNotFoundException e) {
-			LOGGER.log(Level.SEVERE, "ClassNotFoundException " + e.toString());
-			return null;
+			
+			final MysqlDataSource dataSource = new MysqlDataSource();
+			
+			final String rootPath = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("database.properties")).getPath();
+			input = new FileInputStream(rootPath);
+			
+			final Properties props = new Properties();
+			props.load(input);
+			
+			dataSource.setDatabaseName(props.getProperty("database"));
+			dataSource.setServerName(props.getProperty("serverName"));
+			dataSource.setPort(Integer.parseInt(props.getProperty("port")));
+			dataSource.setUser(props.getProperty("user"));
+			dataSource.setPassword(props.getProperty("password"));
+			
+			return dataSource.getConnection();
+			
 		}
 		catch(SQLException e) {
+			
 			LOGGER.log(Level.SEVERE, "SQLException " + e.toString());
 			return null;
+			
+		} catch (FileNotFoundException e) {
+			
+			LOGGER.log(Level.SEVERE, "FileNotFoundEException " + e.toString());
+			return null;
+			
+		} catch (IOException e) {
+			
+			LOGGER.log(Level.SEVERE, "IOException " + e.toString());
+			return null;
+			
+		}
+		finally {
+			
+			if(input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					
+					LOGGER.log(Level.SEVERE, "IOException " + e.toString());
+					
+				}
+			}
 		}
 	}
 	
