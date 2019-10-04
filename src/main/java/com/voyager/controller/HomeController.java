@@ -2,19 +2,19 @@ package com.voyager.controller;
 
 import java.io.IOException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.istack.internal.logging.Logger;
 
 public class HomeController extends HttpServlet {
 	
 	
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(HomeController.class);
+	private static final Logger LOGGER = Logger.getLogger(HomeController.class.getName());
 	
 	public HomeController() {
 		super();

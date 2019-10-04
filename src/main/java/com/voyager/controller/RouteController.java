@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.istack.internal.logging.Logger;
 import com.voyager.dao.Dao;
 import com.voyager.dao.DaoFactory;
 import com.voyager.dao.RouteDaoImpl;
@@ -23,7 +23,7 @@ import com.voyager.model.Route;
 public class RouteController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(RouteController.class);
+	private static final Logger LOGGER = Logger.getLogger(RouteController.class.getName());
 	private final DaoFactory daoFactory = new DaoFactory();
 
     public RouteController() {
@@ -33,11 +33,11 @@ public class RouteController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement.");
+		LOGGER.log(Level.INFO, "Control aquired by Route Controller (GET). Dispatching Route Management.");
+		LOGGER.log(Level.INFO, "Requested servlet path (GET): " + request.getServletPath());
 		
 		
 		final String action = request.getServletPath();
-		System.out.println("Servlet path: " + action);
 		
 		try {
 			switch (action) {
@@ -68,7 +68,8 @@ public class RouteController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		LOGGER.log(Level.INFO, "Control aquired by Route Controller. Dispatching RouteManagement.");
+		LOGGER.log(Level.INFO, "Control aquired by Route Controller (POST). Dispatching Route Management.");
+		LOGGER.log(Level.INFO, "Requested servlet path (POST): " + request.getServletPath());
 		
 		
 		final String action = request.getServletPath();
@@ -97,11 +98,14 @@ public class RouteController extends HttpServlet {
 
 	private final void showNewRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
 		
+		LOGGER.log(Level.SEVERE, "Show New Route method called");
 		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/AddNewRoute.jsp");
 		dispatcher.forward(request, response);
 	}
 	
 	private final void showAllRoutes(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		LOGGER.log(Level.SEVERE, "Show All Routes method called");
 		
 		final Dao dao = daoFactory.getDataAcessObject("route");
 		final List<Route> routeList = dao.findAll();
@@ -114,7 +118,8 @@ public class RouteController extends HttpServlet {
 
 	private final void insertRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
-		System.out.println("Insert route is triggered");
+		LOGGER.log(Level.SEVERE, "Insert Route method called");
+		
 		final String routeName = request.getParameter("routeName");
 		final String routeNumber = request.getParameter("routeNumber");
 		final String origin = request.getParameter("origin");
@@ -152,6 +157,8 @@ public class RouteController extends HttpServlet {
 	
 	private final void deleteRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
+		LOGGER.log(Level.SEVERE, "Delete Route method called");
+		
 		final RouteDaoImpl dao = (RouteDaoImpl) daoFactory.getDataAcessObject("route");
 		final int routeID = Integer.parseInt(request.getParameter("id"));
 		final Route deleteRoute = new Route(routeID);
@@ -162,6 +169,9 @@ public class RouteController extends HttpServlet {
 	}
 	
 	private final void showUpdateRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		LOGGER.log(Level.SEVERE, "Show Update Route method called");
+		
 		
 		final RouteDaoImpl dao = (RouteDaoImpl) daoFactory.getDataAcessObject("route");
 		final int routeID = Integer.parseInt(request.getParameter("id"));
@@ -183,8 +193,9 @@ public class RouteController extends HttpServlet {
 	}
 	
 	private final void updateRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+
+		LOGGER.log(Level.SEVERE, "Update Route method called");
 		
-		System.out.println("Update route is triggered");
 		final int routeID = Integer.parseInt(request.getParameter("routeID"));
 		final String routeName = request.getParameter("routeName");
 		final String routeNumber = request.getParameter("routeNumber");

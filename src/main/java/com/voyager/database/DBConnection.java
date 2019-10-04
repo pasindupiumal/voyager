@@ -1,10 +1,10 @@
 package com.voyager.database;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,12 +12,11 @@ import java.io.InputStream;
 import java.sql.Connection;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import com.sun.istack.internal.logging.Logger;
 
 
 public class DBConnection {
 	
-	private static final Logger LOGGER = Logger.getLogger(DBConnection.class);
+	private static final Logger LOGGER = Logger.getLogger(DBConnection.class.getName());
 	
 	private static DBConnection dbConnectionInstance;
 	

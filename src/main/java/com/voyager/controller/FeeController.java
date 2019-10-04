@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.istack.internal.logging.Logger;
 import com.voyager.dao.Dao;
 import com.voyager.dao.DaoFactory;
 import com.voyager.dao.HaltDaoImpl;
@@ -26,7 +26,7 @@ import com.voyager.model.RouteHalt;
 public class FeeController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = Logger.getLogger(FeeController.class);
+	private static final Logger LOGGER = Logger.getLogger(FeeController.class.getName());
 	private final DaoFactory daoFactory = new DaoFactory();
 
 	
@@ -36,11 +36,11 @@ public class FeeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		LOGGER.log(Level.INFO, "Control aquired by Fee Controller. Dispatching FeesManagement.");
+		LOGGER.log(Level.INFO, "Control aquired by Fee Controller (GET). Dispatching Fees Management.");
 		
+		LOGGER.log(Level.INFO, "Requested servlet path (GET): " + request.getServletPath());
 		
 		final String action = request.getServletPath();
-		System.out.println("Servlet path: " + action);
 		
 		try {
 			switch (action) {
@@ -73,11 +73,13 @@ public class FeeController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LOGGER.log(Level.INFO, "Control aquired by Fee Controller. Dispatching FeesManagement.");
+		
+		LOGGER.log(Level.INFO, "Control aquired by Fee Controller (POST). Dispatching Fees Management.");
+		
+		LOGGER.log(Level.INFO, "Requested servlet path (POST): " + request.getServletPath());
 		
 		
 		final String action = request.getServletPath();
-		System.out.println("Servlet path: " + action);
 		
 		try {
 			switch (action) {
@@ -100,6 +102,8 @@ public class FeeController extends HttpServlet {
 	
 	private final void showViewAllRoutes(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
+		LOGGER.log(Level.INFO, "Show View All Routes method called");
+		
 		final Dao dao = daoFactory.getDataAcessObject("RouteHalt");
 		final List<RouteHalt> routeHaltList = dao.findAll();
 		
@@ -111,6 +115,8 @@ public class FeeController extends HttpServlet {
 	
 	private final void deleteHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
+		LOGGER.log(Level.INFO, "Delete halt method called");
+		
 		final Dao dao = (HaltDaoImpl) daoFactory.getDataAcessObject("Halt");
 		final int haltID = Integer.parseInt(request.getParameter("id"));
 		final Halt deleteHalt = new Halt(haltID);
@@ -121,6 +127,8 @@ public class FeeController extends HttpServlet {
 	}
 	
 	private final void showUpdateHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
+		
+		LOGGER.log(Level.INFO, "Show Update Halt method called");
 		
 		final Dao dao = (HaltDaoImpl) daoFactory.getDataAcessObject("Halt");
 		final int haltID = Integer.parseInt(request.getParameter("id"));
@@ -140,7 +148,8 @@ public class FeeController extends HttpServlet {
 	
 	private final void updateHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
-		System.out.println("Update halt is triggered");
+		LOGGER.log(Level.INFO, "Update Halt method called");
+		
 		final int haltID = Integer.parseInt(request.getParameter("haltID"));
 		final String routeID = request.getParameter("routeID");
 		final String haltName = request.getParameter("haltName");
@@ -177,6 +186,8 @@ public class FeeController extends HttpServlet {
 	
 	private final void showSelectRoute(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
+		LOGGER.log(Level.INFO, "Show Select Route method called");
+		
 		final Dao dao = daoFactory.getDataAcessObject("route");
 		final List<Route> routeList = dao.findAll();
 		
@@ -187,6 +198,8 @@ public class FeeController extends HttpServlet {
 	
 	private final void showInsertHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
+		LOGGER.log(Level.INFO, "Show Insert Halt method called");
+		
 		final RequestDispatcher dispatcher = request.getRequestDispatcher("../jsp/AddNewHalt.jsp");
 		request.setAttribute("routeID", request.getParameter("id"));
 		dispatcher.forward(request, response);
@@ -194,7 +207,8 @@ public class FeeController extends HttpServlet {
 	
 	private final void insertHalt(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException, ClassNotFoundException{
 		
-		System.out.println("Insert route is triggered");
+		LOGGER.log(Level.INFO, "Insert Halt method called");
+		
 		final String routeIDString = request.getParameter("routeID");
 		System.out.println("Route ID: " + routeIDString);
 		final int routeID = Integer.parseInt(request.getParameter("routeID"));
